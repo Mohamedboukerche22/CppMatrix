@@ -110,7 +110,26 @@ Matrix operator*(const Matrix& A, const Matrix& B) {
     return C;
 }
 
+Matrix operator*(const Matrix& A, float scalar){
+    if (A.empty()){
+        throw invalid_argument("Cannot multiply empty matrices");
+    }
+        Matrix C(A.size(), vec(A[0].size(), 0.0f));
 
+    for (size_t i = 0; i < A.size(); ++i) {
+        for (size_t j = 0; j < A[0].size(); ++j) {
+                C[i][j] = A[i][j] * scalar;
+        }
+    }
+
+    return C;
+
+     
+}
+
+Matrix operator*(float scalar, const Matrix& A){
+    return A * scalar;
+}
 
 Matrix operator/(const Matrix& a , const Matrix& b){
   if(a.empty()||b.empty()||a.size()!=b.size()||a[0].size()!=b[0].size()){
